@@ -8,20 +8,31 @@ public class PossibilityManager {
   public  PossibilityManager(Frame frame){
         this.frame = frame;
     }
-
+///*
+// Method that runs through our Sudoku Table and initializes the look for Impossibilities Method.
+//
+// */
     public void solve() {
         for (int i = 0; i < 9; i++){
             for (int j = 0; j < 9; j++) {
                 if (frame.getTileTable()[i][j].getValue() == 0){
                     frame.getTileTable()[i][j].removePossibilties(lookForImpossibilites(i,j));
+                    break;
+                }
+                if (frame.getTileTable()[i][j].getPossibilities().size() == 1){
+                    frame.getTileTable()[i][j].setValue(frame.getTileTable()[i][j].getPossibilities().get(0));
+                    frame.repaint();
                 }
 
             }
         }
     }
+    /*
+    * Method that looks at all the Numbers in the same Column and Line to eliminate the Possibilities.
+    * */
     public ArrayList<Integer> lookForImpossibilites(int i, int j){
         ArrayList<Integer> impossibilities = new ArrayList<>();
-      for (int k = 0; k < 9; k++){
+        for (int k = 0; k < 9; k++){
             if (frame.getTileTable()[i][k].getValue() != 0){
                 impossibilities.add(frame.getTileTable()[i][k].getValue());
             }
@@ -30,6 +41,9 @@ public class PossibilityManager {
             if (frame.getTileTable()[l][j].getValue() != 0){
                 impossibilities.add(frame.getTileTable()[l][j].getValue());
             }
+        }
+        for (int m = 0; m < 9; m++){
+
         }
       return impossibilities;
     }
