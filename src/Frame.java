@@ -19,8 +19,6 @@ public class Frame extends JFrame {
     JButton inputAndOutputButton = new JButton("PROCESS INPUT");
     JButton actionButton = new JButton("ACTION");
 
-    PossibilityManager pm;
-
     boolean transformed = false, inputState, outputState;
 
     /*
@@ -34,8 +32,6 @@ public class Frame extends JFrame {
         contentPane = new JPanel(new GridBagLayout());
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-
-        pm = new PossibilityManager(this);
 
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
