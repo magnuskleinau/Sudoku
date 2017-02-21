@@ -13,7 +13,7 @@ public class PossibilityManager {
         for (int i = 0; i < 9; i++){
             for (int j = 0; j < 9; j++) {
                 if (frame.getTileTable()[i][j].getValue() == 0){
-                    removePossibilities(lookForImpossibilites(i,j));
+                    frame.getTileTable()[i][j].removePossibilties(lookForImpossibilites(i,j));
                 }
 
             }

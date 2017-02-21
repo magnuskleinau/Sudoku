@@ -26,8 +26,13 @@ public class Tile extends JLabel {
         defined = true;
     }
 
-    public void removePossibility(int p) {
-        possibilities.remove(p);
+    public void removePossibilties(ArrayList<Integer> impossibilities){
+
+        for (int i = 0; i < impossibilities.size(); i++){
+            if (possibilities.contains(impossibilities.get(i))){
+                possibilities.remove(impossibilities.get(i));
+            }
+        }
     }
 
     // TODO solve remove problem where index changes during remove process.
