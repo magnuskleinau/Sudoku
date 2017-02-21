@@ -40,9 +40,14 @@ public class PossibilityManager {
                 impossibilities.add(frame.getTileTable()[l][j].getValue());
             }
         }
-        for (int m = 0; m < 9; m++) {
-
+        for (int n = 0; n < 9; n++) {
+            for (int o = 0; o < 9; o++) {
+                if (frame.getTileTable()[n][o].getValue() != 0 && frame.getTileTable()[i][j].getField == frame.getTileTable()[n][o].getField) {
+                    impossibilities.add(frame.getTileTable()[n][o].getValue());
+                }
+            }
         }
+
         return impossibilities;
     }
 }
