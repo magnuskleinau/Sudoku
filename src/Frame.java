@@ -28,15 +28,15 @@ public class Frame extends JFrame {
      */
     public Frame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 648, 648);
+        setBounds(0, 0, 1000, 1000);
         contentPane = new JPanel(new GridBagLayout());
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        c.ipadx = 40;
-        c.ipady = 30;
+        c.ipadx = 60;
+        c.ipady = 50;
 
 
         generateTextFieldsAndLabels();
@@ -102,11 +102,17 @@ public class Frame extends JFrame {
     }
 
     /*
+    Updates the values of the Tiles after solve attempt of program.
+     */
+
+
+
+    /*
      * Takes the input values from the textFields and makes them the values of
      * the tiles. If no value or an invalid value is written value is set to 0.
      * (reverse of inputState())
      */
-    public void processInput() {
+    private void processInput() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 try {
@@ -121,6 +127,7 @@ public class Frame extends JFrame {
         outputState = true;
         inputAndOutputButton.setText("INPUT");
     }
+
 
     /*
      * Takes the input values from the tiles and makes them the values of the

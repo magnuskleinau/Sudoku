@@ -4,6 +4,7 @@ public class Main {
 
     Frame frame;
     Tile[][] tiles;
+    boolean done = false;
 
     public Main(Frame frame) {
         this.frame = frame;
@@ -19,7 +20,6 @@ public class Main {
             for (int j = 0; j < 9; j++) {
                 if (frame.getTileTable()[i][j].getValue() == 0) {
                     frame.getTileTable()[i][j].removePossibilties(lookForImpossibilites(i, j));
-                    break;
                 }
             }
         }
@@ -34,12 +34,11 @@ public class Main {
             if (frame.getTileTable()[i][k].getValue() != 0) {
                 impossibilities.add(frame.getTileTable()[i][k].getValue());
             }
-        }
-        for (int l = 0; l < 9; l++) {
-            if (frame.getTileTable()[l][j].getValue() != 0) {
-                impossibilities.add(frame.getTileTable()[l][j].getValue());
+            if (frame.getTileTable()[k][j].getValue() != 0) {
+                impossibilities.add(frame.getTileTable()[k][j].getValue());
             }
         }
+
         for (int n = 0; n < 9; n++) {
             for (int o = 0; o < 9; o++) {
                 if (frame.getTileTable()[n][o].getValue() != 0 && frame.getTileTable()[i][j].getField() == frame.getTileTable()[n][o].getField()) {

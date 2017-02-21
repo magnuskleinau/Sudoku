@@ -15,25 +15,24 @@ public class Tile extends JLabel {
     }
 
     public void removePossibilties(ArrayList<Integer> impossibilities) {
-        for (int i = 0; i < impossibilities.size(); i++) {
-            if (possibilities.contains(impossibilities.get(i))) {
-                possibilities.remove(impossibilities.get(i));
+        for (Integer imp : impossibilities) {
+            for (int i = 0; i < possibilities.size(); i++) {
+                if (possibilities.get(i) == imp) {
+                    possibilities.remove(i);
+                }
             }
         }
         if (possibilities.size() == 1) {
             setValue(possibilities.get(0));
-            defined = true;
         }
     }
 
     // TODO solve remove problem where index changes during remove process.
     public void removeAllPossibilitiesBut(int p) {
-        int n = 0;
-        while (possibilities.size() > 1) {
-            if (possibilities.get(n) != p) {
-                possibilities.remove(n);
-            } else {
-                n = 1;
+        for (int i = 0; i < possibilities.size(); i++) {
+            if (possibilities.get(i) != p) {
+                possibilities.remove(i);
+                i = 0;
             }
         }
     }
@@ -60,7 +59,7 @@ public class Tile extends JLabel {
             this.value = 0;
             setText("");
         }
-        removeAllPossibilitiesBut(this.value);
+        //removeAllPossibilitiesBut(this.value);
         defined = true;
     }
 
