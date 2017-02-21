@@ -21,8 +21,6 @@ public class PossibilityManager {
                     frame.getTileTable()[i][j].removePossibilties(lookForImpossibilites(i, j));
                     break;
                 }
-
-
             }
         }
     }
