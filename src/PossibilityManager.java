@@ -22,7 +22,7 @@ public class PossibilityManager {
     public ArrayList<Integer> look4Possibilites (int i, int a){
         ArrayList<Integer> possibilities = new ArrayList<>();
       for (int b = 0; b < 9; b++){
-          frame.
+          frame.d
       }
       return possibilities;
     }
