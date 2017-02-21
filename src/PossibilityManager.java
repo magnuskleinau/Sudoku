@@ -21,7 +21,6 @@ public class PossibilityManager {
                 }
                 if (frame.getTileTable()[i][j].getPossibilities().size() == 1){
                     frame.getTileTable()[i][j].setValue(frame.getTileTable()[i][j].getPossibilities().get(0));
-                    frame.repaint();
                 }
 
             }
