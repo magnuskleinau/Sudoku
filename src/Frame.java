@@ -19,7 +19,7 @@ public class Frame extends JFrame {
     JButton inputAndOutputButton = new JButton("PROCESS INPUT");
     JButton actionButton = new JButton("ACTION");
 
-    PossibilityManager pmngr;
+    PossibilityManager pm;
 
     boolean transformed = false, inputState, outputState;
 
@@ -49,7 +49,7 @@ public class Frame extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
-        pmmgr = new PossibilityManager(this);
+        pm = new PossibilityManager(this);
 
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
