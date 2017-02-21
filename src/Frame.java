@@ -19,6 +19,8 @@ public class Frame extends JFrame {
     JButton inputAndOutputButton = new JButton("PROCESS INPUT");
     JButton actionButton = new JButton("ACTION");
 
+    PossibilityManager pmngr;
+
     boolean transformed = false, inputState, outputState;
 
     public static void main(String[] args) {
@@ -47,6 +49,7 @@ public class Frame extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
+        pmmgr = new PossibilityManager(this);
 
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -181,5 +184,11 @@ public class Frame extends JFrame {
 	 * 
 	 */
 
+    public Tile[][] getTileTable() {
+        return tileTable;
+    }
 
+    public void setTileTable(Tile[][] tileTable) {
+        this.tileTable = tileTable;
+    }
 }
