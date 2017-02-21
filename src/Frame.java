@@ -51,6 +51,7 @@ public class Frame extends JFrame {
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.ipadx = 40;
+        c.ipady = 30;
 
 
         generateTextFieldsAndLabels();
@@ -74,10 +75,12 @@ public class Frame extends JFrame {
         });
 
         c.gridy = 9;
-        c.gridx = 1;
+        c.gridx = 0;
+        c.gridwidth = 5;
         contentPane.add(inputAndOutputButton, c);
-        c.gridx = 4;
+        c.gridx = 5;
         contentPane.add(actionButton, c);
+        c.gridwidth = 1;
     }
 
     /*
@@ -147,7 +150,9 @@ public class Frame extends JFrame {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 this.getContentPane().remove(inputTable[i][j]);
-                contentPane.add(tileTable[i][j], "cell " + i + " " + j);
+                c.gridx = i;
+                c.gridy = j;
+                contentPane.add(tileTable[i][j], c);
             }
         }
         SwingUtilities.updateComponentTreeUI(this);
@@ -161,7 +166,9 @@ public class Frame extends JFrame {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 this.getContentPane().remove(tileTable[i][j]);
-                contentPane.add(inputTable[i][j], "cell " + i + " " + j + ", growx");
+                c.gridx = i;
+                c.gridy = j;
+                contentPane.add(inputTable[i][j], c);
             }
         }
         SwingUtilities.updateComponentTreeUI(this);
