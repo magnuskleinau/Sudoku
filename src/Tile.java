@@ -1,6 +1,5 @@
+import javax.swing.*;
 import java.util.ArrayList;
-
-import javax.swing.JLabel;
 
 public class Tile extends JLabel {
 
@@ -14,24 +13,15 @@ public class Tile extends JLabel {
         }
     }
 
-    public void setValue(int value) {
-        this.value = value;
-        if (value > 0 && value < 10) {
-            setText(String.valueOf(this.value));
-        } else {
-            this.value = 0;
-            setText("");
-        }
-        removeAllPossibilitiesBut(this.value);
-        defined = true;
-    }
-
-    public void removePossibilties(ArrayList<Integer> impossibilities){
-
-        for (int i = 0; i < impossibilities.size(); i++){
-            if (possibilities.contains(impossibilities.get(i))){
+    public void removePossibilties(ArrayList<Integer> impossibilities) {
+        for (int i = 0; i < impossibilities.size(); i++) {
+            if (possibilities.contains(impossibilities.get(i))) {
                 possibilities.remove(impossibilities.get(i));
             }
+        }
+        if (possibilities.size() == 1) {
+            setValue(possibilities.get(0));
+            defined = true;
         }
     }
 
@@ -47,18 +37,30 @@ public class Tile extends JLabel {
         }
     }
 
+    public boolean isDefined() {
+        return defined;
+    }
+
 	/*
      *
 	 * ------------------- Getters and Setters -------------------
 	 * 
 	 */
 
-    public boolean isDefined() {
-        return defined;
-    }
-
     public int getValue() {
         return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+        if (value > 0 && value < 10) {
+            setText(String.valueOf(this.value));
+        } else {
+            this.value = 0;
+            setText("");
+        }
+        removeAllPossibilitiesBut(this.value);
+        defined = true;
     }
 
     public ArrayList<Integer> getPossibilities() {
