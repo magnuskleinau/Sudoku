@@ -11,19 +11,26 @@ public class PossibilityManager {
 
     public void solve() {
         for (int i = 0; i < 9; i++){
-            for (int a = 0; a < 9; a++) {
-                if (frame.getTileTable()[a][i].getValue() == 0){
-                    look4Possibilites(i,a);
+            for (int j = 0; j < 9; j++) {
+                if (frame.getTileTable()[i][j].getValue() == 0){
+                    removePossibilities(lookForImpossibilites(i,j));
                 }
 
             }
         }
     }
-    public ArrayList<Integer> look4Possibilites (int i, int a){
-        ArrayList<Integer> possibilities = new ArrayList<>();
-      for (int b = 0; b < 9; b++){
-          frame.d
-      }
-      return possibilities;
+    public ArrayList<Integer> lookForImpossibilites(int i, int j){
+        ArrayList<Integer> impossibilities = new ArrayList<>();
+      for (int k = 0; k < 9; k++){
+            if (frame.getTileTable()[i][k].getValue() != 0){
+                impossibilities.add(frame.getTileTable()[i][k].getValue());
+            }
+        }
+        for (int l = 0; l < 9; l++){
+            if (frame.getTileTable()[l][j].getValue() != 0){
+                impossibilities.add(frame.getTileTable()[l][j].getValue());
+            }
+        }
+      return impossibilities;
     }
 }
