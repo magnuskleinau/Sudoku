@@ -44,6 +44,7 @@ public class PossibilityManager {
             for (int o = 0; o < 9; o++) {
                 if (frame.getTileTable()[n][o].getValue() != 0 && frame.getTileTable()[i][j].getField == frame.getTileTable()[n][o].getField) {
                     impossibilities.add(frame.getTileTable()[n][o].getValue());
+
                 }
             }
         }
