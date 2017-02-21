@@ -9,7 +9,7 @@ public class Frame extends JFrame {
 
     JPanel contentPane;
     BufferedImage image;
-    GridBagConstraints c = new GridBagConstraints();
+    GridBagConstraints c;
 
     Main main = new Main(this);
 
@@ -43,11 +43,14 @@ public class Frame extends JFrame {
     public Frame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(0, 0, 648, 648);
-        contentPane = new JPanel();
+        contentPane = new JPanel(new GridBagLayout());
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
+
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.ipadx = 40;
 
 
         generateTextFieldsAndLabels();
@@ -83,10 +86,10 @@ public class Frame extends JFrame {
      */
     private void generateTextFieldsAndLabels() {
         for (int i = 0; i < 9; i++) {
-            c.gridx = i;
             for (int j = 0; j < 9; j++) {
                 tileTable[i][j] = new Tile();
                 inputTable[i][j] = new JTextField();
+                c.gridx = i;
                 c.gridy = j;
                 contentPane.add(inputTable[i][j], c);
             }
@@ -170,4 +173,6 @@ public class Frame extends JFrame {
 	 * ------------------- Getters and Setters -------------------
 	 * 
 	 */
+
+
 }

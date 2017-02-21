@@ -6,7 +6,7 @@ public class Tile extends JLabel {
 
     int value;
     boolean defined = false;
-    ArrayList<Integer> possibilities = new ArrayList<Integer>();
+    ArrayList<Integer> possibilities = new ArrayList<>();
 
     public Tile() {
         for (int i = 0; i < 9; i++) {
