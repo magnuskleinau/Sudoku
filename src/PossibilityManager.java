@@ -28,7 +28,7 @@ public class PossibilityManager {
     /*
     * Method that looks at all the Numbers in the same Column and Line to eliminate the Possibilities.
     * */
-    public ArrayList<Integer> lookForImpossibilites(int i, int j) {
+    private ArrayList<Integer> lookForImpossibilites(int i, int j) {
         ArrayList<Integer> impossibilities = new ArrayList<>();
         for (int k = 0; k < 9; k++) {
             if (frame.getTileTable()[i][k].getValue() != 0) {
@@ -42,7 +42,7 @@ public class PossibilityManager {
         }
         for (int n = 0; n < 9; n++) {
             for (int o = 0; o < 9; o++) {
-                if (frame.getTileTable()[n][o].getValue() != 0 && frame.getTileTable()[i][j].getField == frame.getTileTable()[n][o].getField) {
+                if (frame.getTileTable()[n][o].getValue() != 0 && frame.getTileTable()[i][j].getField() == frame.getTileTable()[n][o].getField()) {
                     impossibilities.add(frame.getTileTable()[n][o].getValue());
 
                 }

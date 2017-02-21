@@ -23,20 +23,6 @@ public class Frame extends JFrame {
 
     boolean transformed = false, inputState, outputState;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Frame frame = new Frame();
-                    frame.setTitle("Sudoku Test");
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     /*
      * Boundaries of the Frame is set. ContentPane is initialized. MigLayout is
      * added and defined. TextFields are initialized. The Button's
@@ -86,6 +72,20 @@ public class Frame extends JFrame {
         c.gridwidth = 1;
     }
 
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Frame frame = new Frame();
+                    frame.setTitle("Sudoku Test");
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     /*
      * Generates the textFields(input) and tiles(output) and adds the textFields
      * onto the contentPane for the first input.
@@ -93,7 +93,7 @@ public class Frame extends JFrame {
     private void generateTextFieldsAndLabels() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                tileTable[i][j] = new Tile();
+                tileTable[i][j] = new Tile(i / 3 + j / 3);
                 inputTable[i][j] = new JTextField();
                 c.gridx = i;
                 c.gridy = j;

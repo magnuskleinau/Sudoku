@@ -3,11 +3,12 @@ import java.util.ArrayList;
 
 public class Tile extends JLabel {
 
-    int value;
+    int value, field;
     boolean defined = false;
     ArrayList<Integer> possibilities = new ArrayList<>();
 
-    public Tile() {
+    public Tile(int field) {
+        this.field = field;
         for (int i = 0; i < 9; i++) {
             possibilities.add(i + 1);
         }
@@ -65,5 +66,9 @@ public class Tile extends JLabel {
 
     public ArrayList<Integer> getPossibilities() {
         return possibilities;
+    }
+
+    public int getField() {
+        return field;
     }
 }
