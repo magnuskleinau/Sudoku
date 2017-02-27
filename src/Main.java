@@ -92,7 +92,7 @@ class Main {
     }
 
     /*
-    Get horizontal influentialPossibilities
+    Get horizontal influentialPossibilities.
      */
     private Set<Integer> influentialPossibilitiesVertical(int i, int j) {
         Set<Integer> influentialPossibilities = new HashSet<>();
