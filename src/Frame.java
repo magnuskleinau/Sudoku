@@ -7,37 +7,44 @@ import java.awt.image.BufferedImage;
 
 public class Frame extends JFrame {
 
-    JPanel contentPane;
+    private static int WIDTH = 1700, HEIGHT = 1400;
     BufferedImage image;
-    GridBagConstraints c;
+    private JPanel contentPane;
+    private GridBagConstraints c;
 
-    Main main = new Main(this);
+    private Main main = new Main(this);
 
-    Tile[][] tileTable = new Tile[9][9];
-    JTextField[][] inputTable = new JTextField[9][9];
+    private Tile[][] tileTable = new Tile[9][9];
+    private JTextField[][] inputTable = new JTextField[9][9];
 
-    JButton inputAndOutputButton = new JButton("PROCESS INPUT");
-    JButton actionButton = new JButton("ACTION");
+    private JButton inputAndOutputButton = new JButton("INPUT");
 
-    boolean transformed = false, inputState, outputState;
+    private JButton actionButton = new JButton("ACTION");
+    private JButton possibilitiesButton = new JButton("POSSIBILITIES");
+
+    private boolean transformed = false, inputState, outputState;
 
     /*
-     * Boundaries of the Frame is set. ContentPane is initialized. MigLayout is
-     * added and defined. TextFields are initialized. The Button's
-     * ActionListener is initialized to switch between input and output states.
+     * Boundaries of the Frame is set. ContentPane is initialized. GridBagLayout is
+     * added and defined. GridBagConstraints are set so the fit the desired design.
+     * TextFields are initialized. The Button's ActionListener is initialized to
+     * switch between input and output states.
      */
-    public Frame() {
+    private Frame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 1000, 1000);
+        setBounds(0, 0, WIDTH, HEIGHT);
         contentPane = new JPanel(new GridBagLayout());
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        c.ipadx = 60;
-        c.ipady = 50;
+        c.ipadx = WIDTH / 16;
+        c.ipady = HEIGHT / 20;
 
+        inputAndOutputButton.setFont(new Font("TimesNewRoman", Font.BOLD, 26));
+        actionButton.setFont(new Font("TimesNewRoman", Font.BOLD, 26));
+        possibilitiesButton.setFont(new Font("TimesNewRoman", Font.BOLD, 26));
 
         generateTextFieldsAndLabels();
         inputAndOutputButton.addActionListener(new ActionListener() {
@@ -58,15 +65,24 @@ public class Frame extends JFrame {
                 }
             }
         });
+        possibilitiesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showPossibilities();
+            }
+        });
 
         c.gridy = 9;
         c.gridx = 0;
-        c.gridwidth = 5;
+        c.gridwidth = 3;
         contentPane.add(inputAndOutputButton, c);
-        c.gridx = 5;
+        c.gridx = 3;
         contentPane.add(actionButton, c);
+        c.gridx = 6;
+        contentPane.add(possibilitiesButton, c);
         c.gridwidth = 1;
     }
+
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -84,12 +100,13 @@ public class Frame extends JFrame {
 
     /*
      * Generates the textFields(input) and tiles(output) and adds the textFields
-     * onto the contentPane for the first input.
+     * onto the contentPane for the first input. Also assigns a each tile to a
+     * square from 0 to 8 according to their position on he sudoku.
      */
     private void generateTextFieldsAndLabels() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                tileTable[i][j] = new Tile(i / 3 + j / 3);
+                tileTable[i][j] = new Tile(i / 3 + (j / 3) * 3);
                 inputTable[i][j] = new JTextField();
                 c.gridx = i;
                 c.gridy = j;
@@ -98,14 +115,7 @@ public class Frame extends JFrame {
         }
         outputState = false;
         inputState = true;
-        inputAndOutputButton.setText("PROCESS INPUT");
     }
-
-    /*
-    Updates the values of the Tiles after solve attempt of program.
-     */
-
-
 
     /*
      * Takes the input values from the textFields and makes them the values of
@@ -117,15 +127,16 @@ public class Frame extends JFrame {
             for (int j = 0; j < 9; j++) {
                 try {
                     tileTable[i][j].setValue(Integer.valueOf(inputTable[i][j].getText()));
+
                 } catch (Exception e) {
                     tileTable[i][j].setValue(0);
                 }
             }
         }
+        updateLabels();
         removeTextFieldsAddTiles();
         inputState = false;
         outputState = true;
-        inputAndOutputButton.setText("INPUT");
     }
 
 
@@ -146,7 +157,6 @@ public class Frame extends JFrame {
         removeTilesAddTextFields();
         outputState = false;
         inputState = true;
-        inputAndOutputButton.setText("PROCESS INPUT");
     }
 
     /*
@@ -179,6 +189,30 @@ public class Frame extends JFrame {
         }
         SwingUtilities.updateComponentTreeUI(this);
         repaint();
+    }
+
+    /*
+    changes the tiles showPossibilities boolean so that the possibilities can be displayed. updates the labels.
+     */
+    private void showPossibilities() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                tileTable[i][j].switchShowPossibilities();
+            }
+        }
+        updateLabels();
+    }
+
+
+    /*
+    updates all the labels displays: Shows the new, decimated possibilities or even a successful solve of a tile.
+     */
+    void updateLabels() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                tileTable[i][j].display();
+            }
+        }
     }
 
 	/*

@@ -1,29 +1,50 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Tile extends JLabel {
 
-    int value, field;
-    boolean defined = false;
-    ArrayList<Integer> possibilities = new ArrayList<>();
+    private int value, square;
+    private boolean defined = false, showPossibilities = false;
+    private ArrayList<Integer> possibilities = new ArrayList<>();
 
-    public Tile(int field) {
-        this.field = field;
+    Tile(int square) {
+        setFont(new Font("TimesNewRoman", Font.PLAIN, 12));
+        this.square = square;
         for (int i = 0; i < 9; i++) {
             possibilities.add(i + 1);
         }
     }
 
-    public void removePossibilties(ArrayList<Integer> impossibilities) {
+    void removePossibilities(Set<Integer> impossibilities) {
         for (Integer imp : impossibilities) {
-            for (int i = 0; i < possibilities.size(); i++) {
+            if (possibilities.contains(imp)) {
+                possibilities.remove(imp);
+            }
+            /*for (int i = 0; i < possibilities.size(); i++) {
                 if (possibilities.get(i) == imp) {
                     possibilities.remove(i);
                 }
-            }
+            }*/
         }
         if (possibilities.size() == 1) {
             setValue(possibilities.get(0));
+        }
+    }
+
+
+    void display() {
+        if (defined) {
+            setFont(new Font("TimesNewRoman", Font.BOLD, 24));
+            setText(String.valueOf(value));
+        } else if (showPossibilities) {
+            setText("");
+            for (Integer p : possibilities) {
+                setText(getText() + p + " ");
+            }
+        } else {
+            setText("");
         }
     }
 
@@ -37,37 +58,40 @@ public class Tile extends JLabel {
         }
     }
 
-    public boolean isDefined() {
-        return defined;
-    }
-
 	/*
      *
 	 * ------------------- Getters and Setters -------------------
 	 * 
 	 */
 
-    public int getValue() {
+    public boolean isDefined() {
+        return defined;
+    }
+
+    int getValue() {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    void setValue(int value) {
         if (value > 0 && value < 10) {
-            setText(String.valueOf(this.value));
+            this.value = value;
+            defined = true;
         } else {
             this.value = 0;
-            setText("");
         }
         //removeAllPossibilitiesBut(this.value);
-        defined = true;
+
     }
 
-    public ArrayList<Integer> getPossibilities() {
+    ArrayList<Integer> getPossibilities() {
         return possibilities;
     }
 
-    public int getField() {
-        return field;
+    int getSquare() {
+        return square;
+    }
+
+    void switchShowPossibilities() {
+        showPossibilities = !showPossibilities;
     }
 }
