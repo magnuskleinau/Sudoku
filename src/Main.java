@@ -82,6 +82,7 @@ class Main {
                     }
                     if (possibilities.size() == 1) {
                         tiles[i][j].setValue(possibilities.get(0));
+                        findImpossibilities();
                         break;
                     }
                 }
