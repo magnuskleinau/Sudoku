@@ -67,9 +67,9 @@ class Main {
         ArrayList<ArrayList<Integer>> influences = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
+                //influences.add(new ArrayList<>(influentialPossibilitiesSquare(i, j)));
                 influences.add(new ArrayList<>(influentialPossibilitiesHorizontal(i, j)));
                 influences.add(new ArrayList<>(influentialPossibilitiesVertical(i, j)));
-                influences.add(new ArrayList<>(influentialPossibilitiesSquare(i, j)));
 
 
                 for (ArrayList<Integer> inf : influences) {
@@ -92,7 +92,7 @@ class Main {
     }
 
     /*
-    Get horizontal influentialPossibilities
+    Get horizontal influentialPossibilities.
      */
     private Set<Integer> influentialPossibilitiesVertical(int i, int j) {
         Set<Integer> influentialPossibilities = new HashSet<>();
